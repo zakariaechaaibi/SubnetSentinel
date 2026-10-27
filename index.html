@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SubnetSentinel | IPv4 Subnet Analyzer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header / branding -->
+  <header class="top">
+    <div class="brand">&#9919; SUBNET<b>SENTINEL</b><span class="cursor">_</span></div>
+    <div class="tagline">IPv4 recon &amp; subnet analysis toolkit <span class="ver">v1.0</span></div>
+  </header>
+
+  <main>
+    <!-- Input panel -->
+    <section class="panel">
+      <h2>// TARGET</h2>
+      <div class="row">
+        <span class="prompt">root@sentinel:~$</span>
+        <input id="target" type="text" value="192.168.1.10/24" spellcheck="false" autocomplete="off"
+               aria-label="IPv4 address with CIDR prefix or subnet mask" placeholder="192.168.1.10/24 or 10.0.0.1 255.255.0.0">
+        <button id="analyze" class="primary">ANALYZE</button>
+      </div>
+      <div id="chips" class="chips" aria-label="Example targets"></div>
+      <p id="status" class="status" role="status"></p>
+    </section>
+
+    <!-- Results (hidden until a valid target is analyzed) -->
+    <div id="results" hidden>
+      <section class="panel"><h2>// NETWORK SUMMARY</h2><div id="summary" class="grid"></div></section>
+      <section class="panel">
+        <h2>// BINARY VIEW <small><i class="net">network bits</i> <i class="host">host bits</i></small></h2>
+        <div id="binary" class="binary"></div>
+      </section>
+      <section class="panel"><h2>// THREAT INTEL</h2><div id="intel"></div></section>
+      <section class="panel">
+        <h2>// SUBNET SPLITTER</h2>
+        <div class="row">
+          <label for="newPrefix">Split into /</label>
+          <input id="newPrefix" type="number" min="0" max="32" class="small">
+          <span id="splitInfo" class="muted"></span>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>#</th><th>Subnet</th><th>Host range</th><th>Broadcast</th><th>Usable</th></tr></thead>
+            <tbody id="splitBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>Built for defensive security education &middot; Only scan networks you are authorized to test.</footer>
+  <div id="toast" class="toast" role="status"></div>
+
+  <!-- Engine first, then the UI that depends on it -->
+  <script src="js/subnet.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>
+
